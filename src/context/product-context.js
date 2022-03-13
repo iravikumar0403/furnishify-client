@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { productReducer } from "../reducers/productReducer";
+import { productReducer } from "../reducers";
 import axios from "axios";
 const { REACT_APP_API_URL } = process.env;
 
