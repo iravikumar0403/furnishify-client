@@ -1,0 +1,154 @@
+:root {
+  --primary-color: #ae66ea;
+  --primary-text: #ffffff;
+  --secondary-text: #fefefe;
+  --background-primary: #1f2633;
+  --background-secondary: #38445c;
+}
+
+.p-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.filter-section {
+  position: sticky;
+  top: 82px;
+  z-index: 1;
+  height: 100vh;
+}
+
+.invalid {
+  border-color: var(--danger-color);
+}
+
+nav {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+  background-color: var(--background-primary);
+}
+
+.hero {
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    ),
+    url(./assets/hero.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-menu-item {
+  cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.section {
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+aside {
+  border-right: 1px solid var(--divider-color);
+}
+
+.overlay {
+  flex-direction: column;
+}
+
+.form {
+  align-items: center;
+  background-color: var(--background-secondary);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 4;
+  max-width: 350px;
+  margin: 5rem auto;
+  padding: 2rem;
+}
+
+.form > div {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+}
+
+.input-icon:focus-within {
+  border-color: var(--primary-color);
+}
+
+.grid-20-80 {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) 4fr;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  height: fit-content;
+  gap: 1rem;
+}
+.checkout-btn {
+  width: 100%;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+.mr-auto {
+  margin-left: auto;
+}
+
+.filter-header {
+  display: flex;
+}
+
+.cart {
+  display: flex;
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 1140px;
+}
+
+.badge.right {
+  right: -8px;
+}
+
+.badge.top {
+  top: -10px;
+}
+
+.cart-list {
+  flex-grow: 2;
+}
+
+.cart-summary {
+  flex-grow: 1;
+}
+
+.summary-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer {
+  box-shadow: 0 0 4px var(--divider-color);
+}
