@@ -16,9 +16,24 @@ export const ProductDetails = () => {
   }, [product]);
 
   if (loading || !product) {
-    console.log(loading, product);
     return "Loading...";
   }
+
+  const changeThumbnailDebounced = () => {
+    let timeout_id;
+    return (e) => {
+      if (timeout_id) {
+        clearTimeout(timeout_id);
+      }
+      if (e.type === "mouseenter") {
+        timeout_id = setTimeout(() => {
+          setActiveImage(e.target.src);
+        }, 300);
+      }
+    };
+  };
+
+  const handleMouseOver = changeThumbnailDebounced();
 
   return (
     <div className="grid grid-50-50 m-5 px-5">
@@ -38,7 +53,8 @@ export const ProductDetails = () => {
               className="mr-2"
               src={img}
               alt="preview"
-              onMouseOver={() => setActiveImage(img)}
+              onMouseEnter={handleMouseOver}
+              onMouseLeave={handleMouseOver}
             />
           ))}
         </div>
