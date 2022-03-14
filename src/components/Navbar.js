@@ -4,11 +4,13 @@ import { useFilter } from "../context/filter-context";
 import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
 import { logout } from "../services";
+import { useProducts } from "../context/product-context";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { dispatch: filterDispatch } = useFilter();
+  const { cart } = useProducts();
   const {
     state: { user },
     dispatch: authDispatch,
@@ -75,7 +77,9 @@ export const Navbar = () => {
                 <li className="nav-menu-item mx-1">
                   <div className="badge-container">
                     <i className="fs-2 fa fa-cart-shopping"></i>
-                    <div className="badge top right bg-primary">5</div>
+                    <div className="badge top right bg-primary">
+                      {cart.length}
+                    </div>
                   </div>
                 </li>
               </Link>

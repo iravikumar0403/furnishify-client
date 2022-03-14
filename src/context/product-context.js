@@ -1,43 +1,39 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { productReducer } from "../reducers";
-import axios from "axios";
-const { REACT_APP_API_URL } = process.env;
+import { fetchProducts, fetchCart } from "../services";
+import { useAuth } from "./auth-context";
 
 const productContext = createContext();
 const ProductProvider = ({ children }) => {
-  const [{ products, loading, error }, dispatch] = useReducer(productReducer, {
-    products: [],
-    error: null,
-    loading: true,
-  });
+  const [{ products, cart, loading, error }, dispatch] = useReducer(
+    productReducer,
+    {
+      products: [],
+      error: null,
+      loading: true,
+      cart: [],
+    }
+  );
+  const {
+    state: { user },
+  } = useAuth();
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(dispatch);
   }, []);
 
-  const fetchProducts = async () => {
-    dispatch({
-      type: "GET_PRODUCTS",
-    });
-    try {
-      const { data } = await axios.get(`${REACT_APP_API_URL}/products`);
-      dispatch({
-        type: "GET_PRODUCTS_SUCCESS",
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: "GET_PRODUCTS_FAILURE",
-        payload: error,
-      });
+  useEffect(() => {
+    if (user) {
+      fetchCart(dispatch);
     }
-  };
+  }, [user]);
 
   return (
     <productContext.Provider
       value={{
         loading,
         products,
+        cart,
         error,
         dispatch,
       }}

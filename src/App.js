@@ -7,6 +7,7 @@ import {
   ProductListing,
   ProductDetails,
   Signup,
+  Cart,
 } from "./pages";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </Fragment>

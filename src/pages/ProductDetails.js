@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../context/auth-context";
 import { useProducts } from "../context/product-context";
+import { updateCart } from "../services/cart";
 import { findItemById } from "../utils";
 
 export const ProductDetails = () => {
-  const { loading, products } = useProducts();
+  const { loading, products, cart, dispatch } = useProducts();
   const [activeImage, setActiveImage] = useState("");
   const { id } = useParams();
+  const navigate = useNavigate();
+  const {
+    state: { user },
+  } = useAuth();
   const product = findItemById(id, products);
 
   useEffect(() => {
@@ -18,6 +24,18 @@ export const ProductDetails = () => {
   if (loading || !product) {
     return "Loading...";
   }
+
+  const addToCart = (product) => {
+    if (user) {
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: product,
+      });
+      updateCart([...cart, { ...product, quantity: 1 }]);
+    } else {
+      navigate("/login");
+    }
+  };
 
   const changeThumbnailDebounced = () => {
     let timeout_id;
@@ -59,7 +77,15 @@ export const ProductDetails = () => {
           ))}
         </div>
         <div className="my-2">
-          <button className="btn primary">Add to cart</button>
+          {findItemById(id, cart) ? (
+            <button className="btn primary" onClick={() => navigate("/cart")}>
+              Go to cart
+            </button>
+          ) : (
+            <button className="btn primary" onClick={() => addToCart(product)}>
+              Add to cart
+            </button>
+          )}
           <button className="btn primary outlined ml-2">
             Save to wishlist
           </button>
