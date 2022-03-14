@@ -3,8 +3,10 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { loginFormReducer } from "../reducers";
 import { login } from "../services";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export const Login = () => {
+  useDocumentTitle("Login | Furnishify");
   const navigate = useNavigate();
   const [{ email, password, showPass }, formDispatch] = useReducer(
     loginFormReducer,
