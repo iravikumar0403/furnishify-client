@@ -10,7 +10,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { dispatch: filterDispatch } = useFilter();
-  const { cart } = useProducts();
+  const { cart, wishlist } = useProducts();
   const {
     state: { user },
     dispatch: authDispatch,
@@ -69,7 +69,11 @@ export const Navbar = () => {
                 <li className="nav-menu-item mx-1">
                   <div className="badge-container">
                     <i className="fs-2 fa-solid fa-heart"></i>
-                    <div className="badge top right bg-primary">2</div>
+                    {wishlist.length > 0 && (
+                      <div className="badge top right bg-primary">
+                        {wishlist.length}
+                      </div>
+                    )}
                   </div>
                 </li>
               </Link>
@@ -77,9 +81,11 @@ export const Navbar = () => {
                 <li className="nav-menu-item mx-1">
                   <div className="badge-container">
                     <i className="fs-2 fa fa-cart-shopping"></i>
-                    <div className="badge top right bg-primary">
-                      {cart.length}
-                    </div>
+                    {cart.length > 0 && (
+                      <div className="badge top right bg-primary">
+                        {cart.length}
+                      </div>
+                    )}
                   </div>
                 </li>
               </Link>

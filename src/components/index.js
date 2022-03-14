@@ -7,3 +7,4 @@ export { Products } from "./Products";
 export { ProductCard } from "./ProductCard";
 export { CartList } from "./CartList";
 export { CartSummary } from "./CartSummary";
+export { RequireAuth } from "./RequireAuth";

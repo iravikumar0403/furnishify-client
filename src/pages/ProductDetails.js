@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { useProducts } from "../context/product-context";
+import { updateWishlist } from "../services";
 import { updateCart } from "../services/cart";
 import { findItemById } from "../utils";
 
 export const ProductDetails = () => {
-  const { loading, products, cart, dispatch } = useProducts();
+  const { loading, products, cart, wishlist, dispatch } = useProducts();
   const [activeImage, setActiveImage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export const ProductDetails = () => {
     }
   };
 
-  const changeThumbnailDebounced = () => {
+  const changeThumbnail = () => {
     let timeout_id;
     return (e) => {
       if (timeout_id) {
@@ -51,7 +52,27 @@ export const ProductDetails = () => {
     };
   };
 
-  const handleMouseOver = changeThumbnailDebounced();
+  const handleMouseOver = changeThumbnail();
+
+  const addToWishlist = (product) => {
+    if (user) {
+      dispatch({
+        type: "ADD_TO_WISHLIST",
+        payload: product,
+      });
+      updateWishlist([...wishlist, product]);
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const removeFromWishlist = (product) => {
+    dispatch({
+      type: "REMOVE_FROM_WISHLIST",
+      payload: product,
+    });
+    updateWishlist(wishlist.filter((item) => item._id !== product._id));
+  };
 
   return (
     <div className="grid grid-50-50 m-5 px-5">
@@ -63,7 +84,7 @@ export const ProductDetails = () => {
         <p className="text-secondary">By {product.seller}</p>
         <h2>₹ {product.price}</h2>
         <p>{product.description}</p>
-        <div style={{ display: "flex" }}>
+        <div>
           {product.images.map((img, index) => (
             <img
               key={index}
@@ -86,9 +107,21 @@ export const ProductDetails = () => {
               Add to cart
             </button>
           )}
-          <button className="btn primary outlined ml-2">
-            Save to wishlist
-          </button>
+          {findItemById(id, wishlist) ? (
+            <button
+              className="btn primary outlined ml-2"
+              onClick={() => removeFromWishlist(product)}
+            >
+              Remove from wishlist
+            </button>
+          ) : (
+            <button
+              className="btn primary outlined ml-2"
+              onClick={() => addToWishlist(product)}
+            >
+              Save to wishlist
+            </button>
+          )}
         </div>
       </div>
     </div>
