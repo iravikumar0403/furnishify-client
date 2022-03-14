@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Navbar, Footer } from "./components";
-import { Homepage, ProductListing } from "./pages";
+import { Homepage, Login, ProductListing } from "./pages";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/products" element={<ProductListing />} />
       </Routes>
       <Footer />

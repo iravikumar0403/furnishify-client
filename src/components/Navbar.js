@@ -1,23 +1,34 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
+import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const { dispatch } = useFilter();
+  const { dispatch: filterDispatch } = useFilter();
+  const {
+    state: { user },
+    dispatch: autDispatch,
+  } = useAuth();
 
   useEffect(() => {
     const id = setTimeout(() => {
-      dispatch({
+      filterDispatch({
         type: "SEARCH",
         payload: query,
       });
     }, 500);
 
     return () => clearTimeout(id);
-  }, [dispatch, query]);
+  }, [filterDispatch, query]);
+
+  const handleLogoutClick = () => {
+    autDispatch({
+      type: "LOGOUT",
+    });
+  };
 
   return (
     <nav>
@@ -50,41 +61,53 @@ export const Navbar = () => {
               <i className="fa fa-search"></i>
             </button>
           </div>
-          <Link to="wishlist">
-            <li className="nav-menu-item mx-1">
-              <div className="badge-container">
-                <i className="fs-2 fa-solid fa-heart"></i>
-                <div className="badge top right bg-primary">2</div>
-              </div>
-            </li>
-          </Link>
-          <Link to="cart">
-            <li className="nav-menu-item mx-1">
-              <div className="badge-container">
-                <i className="fs-2 fa fa-cart-shopping"></i>
-                <div className="badge top right bg-primary">5</div>
-              </div>
-            </li>
-          </Link>
-          <div className="dropdown">
-            <button
-              className="btn text-light icon-only"
-              onClick={() => {
-                setIsOpen((isOpen) => !isOpen);
-              }}
-            >
-              <i className="fs-2 fa-solid fa-user"></i>
-            </button>
-            <ul
-              className="dropdown-menu"
-              style={isOpen ? { display: "block", right: 0 } : {}}
-            >
-              <Link to="account">
-                <li className="dropdown-item">Account</li>
+          {user ? (
+            <Fragment>
+              <Link to="wishlist">
+                <li className="nav-menu-item mx-1">
+                  <div className="badge-container">
+                    <i className="fs-2 fa-solid fa-heart"></i>
+                    <div className="badge top right bg-primary">2</div>
+                  </div>
+                </li>
               </Link>
-              <li className="dropdown-item">Logout</li>
-            </ul>
-          </div>
+              <Link to="cart">
+                <li className="nav-menu-item mx-1">
+                  <div className="badge-container">
+                    <i className="fs-2 fa fa-cart-shopping"></i>
+                    <div className="badge top right bg-primary">5</div>
+                  </div>
+                </li>
+              </Link>
+              <div className="dropdown">
+                <button
+                  className="btn text-light icon-only"
+                  onClick={() => {
+                    setIsOpen((isOpen) => !isOpen);
+                  }}
+                >
+                  <i className="fs-2 fa-solid fa-user"></i>
+                </button>
+                <ul
+                  className="dropdown-menu"
+                  style={isOpen ? { display: "block", right: 0 } : {}}
+                >
+                  <Link to="account">
+                    <li className="dropdown-item">Account</li>
+                  </Link>
+                  <li className="dropdown-item" onClick={handleLogoutClick}>
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            </Fragment>
+          ) : (
+            <Link to="login">
+              <li className="nav-menu-item mx-1">
+                <button className="btn primary">Login</button>
+              </li>
+            </Link>
+          )}
         </ul>
         <div className="nav-menu-resp">
           <i className="fas fa-bars"></i>
