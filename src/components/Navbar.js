@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
 import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
+import { logout } from "../services";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,7 @@ export const Navbar = () => {
   const { dispatch: filterDispatch } = useFilter();
   const {
     state: { user },
-    dispatch: autDispatch,
+    dispatch: authDispatch,
   } = useAuth();
 
   useEffect(() => {
@@ -25,9 +26,8 @@ export const Navbar = () => {
   }, [filterDispatch, query]);
 
   const handleLogoutClick = () => {
-    autDispatch({
-      type: "LOGOUT",
-    });
+    setIsOpen(false);
+    logout(authDispatch);
   };
 
   return (

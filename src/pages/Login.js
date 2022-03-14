@@ -18,7 +18,6 @@ export const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      console.log(authDispatch);
       await login({ email, password }, authDispatch);
     } catch (error) {}
   };

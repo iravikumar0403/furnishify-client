@@ -1,5 +1,4 @@
 export const authReducer = (state, { type, payload }) => {
-  console.log(type);
   switch (type) {
     case "INITIATE_AUTH":
       return {
