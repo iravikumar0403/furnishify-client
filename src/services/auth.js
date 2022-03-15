@@ -43,7 +43,6 @@ export const login = async ({ email, password }, dispatch) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error);
     dispatch({
       type: "AUTH_FAILURE",
       payload:
