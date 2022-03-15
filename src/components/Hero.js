@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Hero = () => {
   return (
     <header className="hero">
@@ -7,7 +9,9 @@ export const Hero = () => {
         <p className="text-light fs-2">
           Nail your aesthetic with products our stylists love and recommend.
         </p>
-        <button className="btn primary">SHOP NOW</button>
+        <Link to="/products" className="btn primary">
+          SHOP NOW
+        </Link>
       </div>
     </header>
   );
