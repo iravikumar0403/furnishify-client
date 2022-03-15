@@ -4,7 +4,7 @@ export const categories = [
     name: "Low and Side Tables",
     image:
       "https://hausimg.imgix.net/s/files/1/0053/2792/collections/Square-Website-Haus-London-Menu-Plinth.jpg",
-    slug: "low-and-side-tables",
+    slug: "table",
   },
   {
     id: 2,
