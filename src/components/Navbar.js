@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useFilter } from "../context/filter-context";
 import logo from "../assets/furnishify.png";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const { dispatch } = useFilter();
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      dispatch({
+        type: "SEARCH",
+        payload: query,
+      });
+    }, 500);
+
+    return () => clearTimeout(id);
+  }, [dispatch, query]);
 
   return (
     <nav>
@@ -25,13 +39,18 @@ export const Navbar = () => {
       <div className="nav-section right">
         <ul className="nav-menu">
           <div className="input-icon">
-            <input className="input" type="text" placeholder="Search" />
+            <input
+              className="input"
+              type="text"
+              placeholder="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
             <button className="btn icon-only text-light">
               <i className="fa fa-search"></i>
             </button>
           </div>
           <Link to="wishlist">
-            {" "}
             <li className="nav-menu-item mx-1">
               <div className="badge-container">
                 <i className="fs-2 fa-solid fa-heart"></i>
