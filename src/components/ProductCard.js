@@ -8,9 +8,7 @@ export const ProductCard = ({ product }) => {
   const { _id, images, title, seller, price, rating } = product;
   const navigate = useNavigate();
   const { wishlist, dispatch } = useProducts();
-  const {
-    state: { user },
-  } = useAuth();
+  const { user } = useAuth();
 
   const addToWishlist = (product) => {
     if (user) {

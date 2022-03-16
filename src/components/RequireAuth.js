@@ -3,9 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 
 export const RequireAuth = () => {
-  const {
-    state: { user },
-  } = useAuth();
+  const { user } = useAuth();
 
   if (user) {
     return <Outlet />;

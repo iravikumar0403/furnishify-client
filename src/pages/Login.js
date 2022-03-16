@@ -12,10 +12,7 @@ export const Login = () => {
     loginFormReducer,
     { email: "", password: "", showPass: false }
   );
-  const {
-    state: { loading, error, user },
-    dispatch: authDispatch,
-  } = useAuth();
+  const { loading, error, user, dispatch: authDispatch } = useAuth();
 
   const handleLogin = async (event) => {
     event.preventDefault();

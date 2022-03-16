@@ -15,9 +15,7 @@ const ProductProvider = ({ children }) => {
       wishlist: [],
     }
   );
-  const {
-    state: { user },
-  } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     fetchProducts(dispatch);

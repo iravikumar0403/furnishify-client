@@ -11,10 +11,7 @@ export const Navbar = () => {
   const [query, setQuery] = useState("");
   const { dispatch: filterDispatch } = useFilter();
   const { cart, wishlist } = useProducts();
-  const {
-    state: { user },
-    dispatch: authDispatch,
-  } = useAuth();
+  const { user, dispatch: authDispatch } = useAuth();
 
   useEffect(() => {
     const id = setTimeout(() => {

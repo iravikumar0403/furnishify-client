@@ -16,10 +16,7 @@ export const Signup = () => {
       confirmPassword: "",
       showPass: false,
     });
-  const {
-    state: { loading, user },
-    dispatch,
-  } = useAuth();
+  const { loading, user, dispatch } = useAuth();
 
   const handleSignup = async (event) => {
     event.preventDefault();

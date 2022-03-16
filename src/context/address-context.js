@@ -7,9 +7,7 @@ const addressContext = createContext();
 const AddressProvider = ({ children }) => {
   const [address, setAddress] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState(null);
-  const {
-    state: { user },
-  } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     if (user) {

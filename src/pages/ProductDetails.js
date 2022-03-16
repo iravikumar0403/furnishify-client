@@ -11,9 +11,7 @@ export const ProductDetails = () => {
   const [activeImage, setActiveImage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
-  const {
-    state: { user },
-  } = useAuth();
+  const { user } = useAuth();
   const product = findItemById(id, products);
 
   useEffect(() => {
