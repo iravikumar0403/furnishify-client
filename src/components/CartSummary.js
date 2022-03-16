@@ -35,7 +35,7 @@ export const CartSummary = () => {
       </ul>
       <div>
         <Link to="/checkout">
-          <button className="btn primary checkout-btn">
+          <button className="btn primary checkout-btn" disabled={!cart.length}>
             Proceed to Checkout
           </button>
         </Link>
