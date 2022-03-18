@@ -200,3 +200,7 @@ aside {
 .footer {
   box-shadow: 0 0 4px var(--divider-color);
 }
+
+.modal{
+  overflow: hidden;
+}

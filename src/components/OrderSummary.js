@@ -10,14 +10,17 @@ export const OrderSummary = ({ setCurrentStep }) => {
     <Fragment>
       <h2 className="text-center">Order Summary</h2>
       <table>
+        <thead>
         <tr>
           <th colSpan={2}>Name</th>
           <th>Price</th>
           <th>Quantity</th>
           <th>Total</th>
         </tr>
+        </thead>
+        <tbody>
         {cart.map((product) => (
-          <tr>
+          <tr key={product._id}>
             <td colSpan={2}>{product.title}</td>
             <td className="text-center">₹ {product.price}</td>
             <td className="text-center">{product.quantity}</td>
@@ -42,6 +45,7 @@ export const OrderSummary = ({ setCurrentStep }) => {
             ₹ {calcTotalPrice(cartTotal, deliveryCharges)}
           </td>
         </tr>
+        </tbody>
       </table>
       <div className="btn-group">
         <button

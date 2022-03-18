@@ -51,3 +51,40 @@ export const signupFormReducer = (state, { type, payload }) => {
       throw new Error("Unhandled action type");
   }
 };
+
+export const addressFormReducer = (state, { type, payload }) => {
+  switch (type) {
+    case "NAME":
+      return {
+        ...state,
+        name: payload,
+      };
+    case "PHONE":
+      return {
+        ...state,
+        phone: payload,
+      };
+    case "STREET":
+      return {
+        ...state,
+        street: payload,
+      };
+    case "CITY":
+      return {
+        ...state,
+        city: payload,
+      };
+    case "STATE":
+      return {
+        ...state,
+        state: payload,
+      };
+    case "ZIP":
+      return {
+        ...state,
+        zip: payload,
+      };
+    default:
+      throw new Error(`Unhandled action type ${type}`);
+  }
+};

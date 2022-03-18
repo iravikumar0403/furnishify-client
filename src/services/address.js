@@ -7,3 +7,14 @@ export const fetchAddress = async (setAddress) => {
     setAddress(data[0].address);
   } catch (error) {}
 };
+
+export const updateAddress = async (address) => {
+  try {
+    const { data } = await axios.post(`${REACT_APP_API_URL}/address`, {
+      address
+    });
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
+}
