@@ -64,7 +64,7 @@ export const Login = () => {
               onChange={(e) =>
                 formDispatch({
                   type: "PASSWORD",
-                  payload: e.target.value.toLowerCase(),
+                  payload: e.target.value,
                 })
               }
             />

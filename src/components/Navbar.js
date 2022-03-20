@@ -35,23 +35,23 @@ export const Navbar = () => {
   return (
     <nav>
       <div className="nav-section left">
-        <Link to="/">
-          <div className="nav-logo">
-            <img loading="lazy" src={logo} alt="logo" />
-          </div>
-        </Link>
-        <ul className="nav-menu">
+        <div className="nav-logo">
           <Link to="/">
-            <li className="nav-menu-item mx-1">Home</li>
+            <img loading="lazy" src={logo} alt="logo" />
           </Link>
-          <Link to="products">
-            <li className="nav-menu-item mx-1">Shop Now</li>
-          </Link>
+        </div>
+        <ul className="nav-menu">
+          <li className="nav-menu-item mx-1">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="nav-menu-item mx-1">
+            <Link to="products">Shop Now</Link>
+          </li>
         </ul>
       </div>
       <div className="nav-section right">
         <ul className="nav-menu">
-          <div className="input-icon">
+          <div className="input-icon mr-1">
             <input
               className="input"
               type="text"
@@ -65,24 +65,26 @@ export const Navbar = () => {
           </div>
           {user ? (
             <Fragment>
-              <Link to="wishlist">
-                <li className="nav-menu-item mx-1">
-                  <div className="badge-container">
+              <li className="nav-menu-item mx-1">
+                <span className="badge-container">
+                  <Link to="wishlist">
                     <i className="fs-2 fa-solid fa-heart"></i>
-                    <div className="badge top right bg-primary">2</div>
-                  </div>
-                </li>
-              </Link>
-              <Link to="cart">
-                <li className="nav-menu-item mx-1">
-                  <div className="badge-container">
+                    <span className="badge top right bg-primary text-light">
+                      2
+                    </span>
+                  </Link>
+                </span>
+              </li>
+              <li className="nav-menu-item mx-1">
+                <span className="badge-container">
+                  <Link to="cart">
                     <i className="fs-2 fa fa-cart-shopping"></i>
-                    <div className="badge top right bg-primary">
+                    <span className="badge top right bg-primary text-light">
                       {cart.length}
-                    </div>
-                  </div>
-                </li>
-              </Link>
+                    </span>
+                  </Link>
+                </span>
+              </li>
               <div className="dropdown">
                 <button
                   className="btn text-light icon-only"
@@ -96,9 +98,9 @@ export const Navbar = () => {
                   className="dropdown-menu"
                   style={isOpen ? { display: "block", right: 0 } : {}}
                 >
-                  <Link to="account">
-                    <li className="dropdown-item">Account</li>
-                  </Link>
+                  <li className="dropdown-item">
+                    <Link to="account">Account</Link>
+                  </li>
                   <li className="dropdown-item" onClick={handleLogoutClick}>
                     Logout
                   </li>
@@ -106,11 +108,11 @@ export const Navbar = () => {
               </div>
             </Fragment>
           ) : (
-            <Link to="login">
-              <li className="nav-menu-item mx-1">
+            <li className="nav-menu-item mx-1">
+              <Link to="login">
                 <button className="btn primary">Login</button>
-              </li>
-            </Link>
+              </Link>
+            </li>
           )}
         </ul>
         <div className="nav-menu-resp">

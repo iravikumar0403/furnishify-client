@@ -44,6 +44,7 @@ export const login = async ({ email, password }, dispatch) => {
     });
   } catch (error) {
     console.log(error);
+    localStorage.clear();
     dispatch({
       type: "AUTH_FAILURE",
       payload:
