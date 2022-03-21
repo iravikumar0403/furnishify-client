@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { useProducts } from "../context/product-context";
 import { updateWishlist } from "../services";
@@ -11,6 +11,7 @@ export const ProductDetails = () => {
   const [activeImage, setActiveImage] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const {
     state: { user },
   } = useAuth();
@@ -34,7 +35,7 @@ export const ProductDetails = () => {
       });
       updateCart([...cart, { ...product, quantity: 1 }]);
     } else {
-      navigate("/login");
+      navigate("/login", { state: { from: pathname } });
     }
   };
 
@@ -62,7 +63,7 @@ export const ProductDetails = () => {
       });
       updateWishlist([...wishlist, product]);
     } else {
-      navigate("/login");
+      navigate("/login", { state: { from: pathname } });
     }
   };
 

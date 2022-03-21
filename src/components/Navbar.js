@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
 import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
@@ -12,6 +12,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const { dispatch: filterDispatch } = useFilter();
   const { cart, wishlist } = useProducts();
+  const { pathname } = useLocation();
   const {
     state: { user },
     dispatch: authDispatch,
@@ -112,7 +113,9 @@ export const Navbar = () => {
             <li className="nav-menu-item mx-1">
               <button
                 className="btn primary"
-                onClick={() => navigate("/login")}
+                onClick={() =>
+                  navigate("/login", { state: { from: pathname } })
+                }
               >
                 Login
               </button>
