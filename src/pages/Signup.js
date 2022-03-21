@@ -23,7 +23,11 @@ export const Signup = () => {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-    await signup({ name, email, password }, dispatch);
+    try {
+      await signup({ name, email, password }, dispatch);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (user) {
