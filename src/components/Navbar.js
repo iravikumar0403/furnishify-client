@@ -1,14 +1,17 @@
 import { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
 import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
 import { logout } from "../services";
+import { useProducts } from "../context/product-context";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
   const { dispatch: filterDispatch } = useFilter();
+  const { cart } = useProducts();
   const {
     state: { user },
     dispatch: authDispatch,
@@ -78,7 +81,7 @@ export const Navbar = () => {
                   <Link to="cart">
                     <i className="fs-2 fa fa-cart-shopping"></i>
                     <span className="badge top right bg-primary text-light">
-                      5
+                      {cart.length}
                     </span>
                   </Link>
                 </span>
@@ -107,9 +110,12 @@ export const Navbar = () => {
             </Fragment>
           ) : (
             <li className="nav-menu-item mx-1">
-              <Link to="login">
-                <button className="btn primary">Login</button>
-              </Link>
+              <button
+                className="btn primary"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </button>
             </li>
           )}
         </ul>
