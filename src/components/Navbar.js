@@ -71,7 +71,7 @@ export const Navbar = () => {
                   <Link to="wishlist">
                     <i className="fs-2 fa-solid fa-heart"></i>
                     <span className="badge top right bg-primary text-light">
-                      2
+                      {wishlist.length}
                     </span>
                   </Link>
                 </span>
