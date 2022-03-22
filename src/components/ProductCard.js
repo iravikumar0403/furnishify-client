@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { useProducts } from "../context/product-context";
 import { updateWishlist } from "../services";
@@ -7,6 +7,7 @@ import { findItemById } from "../utils";
 export const ProductCard = ({ product }) => {
   const { _id, images, title, seller, price, rating } = product;
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { wishlist, dispatch } = useProducts();
   const {
     state: { user },
@@ -20,7 +21,7 @@ export const ProductCard = ({ product }) => {
       });
       updateWishlist([...wishlist, product]);
     } else {
-      navigate("/login");
+      navigate("/login", { state: { from: pathname } });
     }
   };
 

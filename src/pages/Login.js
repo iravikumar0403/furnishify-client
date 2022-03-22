@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { loginFormReducer } from "../reducers";
 import { login } from "../services";
@@ -12,6 +12,11 @@ export const Login = () => {
     loginFormReducer,
     { email: "", password: "", showPass: false }
   );
+
+  const {
+    state: { from },
+  } = useLocation();
+
   const {
     state: { loading, error, user },
     dispatch: authDispatch,
@@ -24,8 +29,18 @@ export const Login = () => {
     } catch (error) {}
   };
 
+  const handleGuestLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(
+        { email: "test@email.com", password: "123test" },
+        authDispatch
+      );
+    } catch (error) {}
+  };
+
   if (user) {
-    return <Navigate to="/" />;
+    return <Navigate to={from || "/"} />;
   }
 
   return (
@@ -64,7 +79,7 @@ export const Login = () => {
               onChange={(e) =>
                 formDispatch({
                   type: "PASSWORD",
-                  payload: e.target.value.toLowerCase(),
+                  payload: e.target.value,
                 })
               }
             />
@@ -90,11 +105,18 @@ export const Login = () => {
           disabled={loading}
           value="Login"
         />
+        <button
+          className="btn primary outlined"
+          onClick={handleGuestLogin}
+          disabled={loading}
+        >
+          Login as guest user
+        </button>
         <p>
           Not a member? &nbsp;
           <span
             className="link primary cursor-pointer"
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/signup", { state: { from } })}
           >
             Sign up
           </span>

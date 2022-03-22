@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { signupFormReducer } from "../reducers";
 import { signup } from "../services";
@@ -8,6 +8,9 @@ import { useDocumentTitle } from "../hooks/useDocumentTitle";
 export const Signup = () => {
   useDocumentTitle("Signup | Furnishify");
   const navigate = useNavigate();
+  const {
+    state: { from },
+  } = useLocation();
   const [{ name, email, password, confirmPassword, showPass }, formDispatch] =
     useReducer(signupFormReducer, {
       name: "",
@@ -23,11 +26,15 @@ export const Signup = () => {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-    await signup({ name, email, password }, dispatch);
+    try {
+      await signup({ name, email, password }, dispatch);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (user) {
-    return <Navigate to="/" />;
+    return <Navigate to={from || "/"} />;
   }
 
   return (
@@ -133,7 +140,7 @@ export const Signup = () => {
           Already a member? &nbsp;
           <span
             className="link primary cursor-pointer"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/login", { state: { from } })}
           >
             Login
           </span>
