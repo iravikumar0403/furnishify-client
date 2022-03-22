@@ -1,9 +1,10 @@
 import React from "react";
 import { useProducts } from "../context/product-context";
+import { updateWishlist } from "../services";
 import { updateCart } from "../services/cart";
 
 export const CartList = () => {
-  const { cart, dispatch } = useProducts();
+  const { cart, wishlist, dispatch } = useProducts();
 
   const incrementProductCount = (product) => {
     dispatch({
@@ -39,6 +40,15 @@ export const CartList = () => {
       payload: product,
     });
     updateCart(cart.filter((item) => item._id !== product._id));
+  };
+
+  const moveToWishlist = (product) => {
+    dispatch({
+      type: "MOVE_TO_WISHLIST",
+      payload: product,
+    });
+    updateCart(cart.filter((item) => item._id !== product._id));
+    updateWishlist([...wishlist, product]);
   };
 
   return (
@@ -80,7 +90,12 @@ export const CartList = () => {
               >
                 Remove from cart
               </button>
-              <button className="btn primary ml-1">Move to wishlist</button>
+              <button
+                className="btn primary ml-1"
+                onClick={() => moveToWishlist(product)}
+              >
+                Move to wishlist
+              </button>
             </div>
           </div>
         </div>

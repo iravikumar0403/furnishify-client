@@ -58,7 +58,37 @@ export const productReducer = (state, { type, payload }) => {
             : item
         ),
       };
+    case "FETCH_WISHLIST":
+      return {
+        ...state,
+        wishlist: payload,
+      };
 
+    case "MOVE_TO_WISHLIST":
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item._id !== payload._id),
+        wishlist: [...state.wishlist, payload],
+      };
+
+    case "ADD_TO_WISHLIST":
+      return {
+        ...state,
+        wishlist: [...state.wishlist, payload],
+      };
+
+    case "REMOVE_FROM_WISHLIST":
+      return {
+        ...state,
+        wishlist: state.wishlist.filter((item) => item._id !== payload._id),
+      };
+
+    case "RESET":
+      return {
+        ...state,
+        cart: [],
+        wishlist: [],
+      };
     default:
       throw new Error("Unhandled action type");
   }

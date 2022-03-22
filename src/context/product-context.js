@@ -1,17 +1,18 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { productReducer } from "../reducers";
-import { fetchProducts, fetchCart } from "../services";
+import { fetchProducts, fetchCart, fetchWishlist } from "../services";
 import { useAuth } from "./auth-context";
 
 const productContext = createContext();
 const ProductProvider = ({ children }) => {
-  const [{ products, cart, loading, error }, dispatch] = useReducer(
+  const [{ products, cart, wishlist, loading, error }, dispatch] = useReducer(
     productReducer,
     {
       products: [],
       error: null,
       loading: true,
       cart: [],
+      wishlist: [],
     }
   );
   const {
@@ -25,6 +26,9 @@ const ProductProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       fetchCart(dispatch);
+      fetchWishlist(dispatch);
+    } else {
+      dispatch({ type: "RESET" });
     }
   }, [user]);
 
@@ -34,6 +38,7 @@ const ProductProvider = ({ children }) => {
         loading,
         products,
         cart,
+        wishlist,
         error,
         dispatch,
       }}

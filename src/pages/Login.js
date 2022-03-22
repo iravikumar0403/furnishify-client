@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { loginFormReducer } from "../reducers";
 import { login } from "../services";
@@ -12,6 +12,11 @@ export const Login = () => {
     loginFormReducer,
     { email: "", password: "", showPass: false }
   );
+
+  const {
+    state: { from },
+  } = useLocation();
+
   const {
     state: { loading, error, user },
     dispatch: authDispatch,
@@ -35,7 +40,7 @@ export const Login = () => {
   };
 
   if (user) {
-    return <Navigate to="/" />;
+    return <Navigate to={from || "/"} />;
   }
 
   return (
@@ -111,7 +116,7 @@ export const Login = () => {
           Not a member? &nbsp;
           <span
             className="link primary cursor-pointer"
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/signup", { state: { from } })}
           >
             Sign up
           </span>
