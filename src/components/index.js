@@ -6,7 +6,6 @@ export { Categories } from "./Categories";
 export { Filters } from "./Filters";
 export { Footer } from "./Footer";
 export { Hero } from "./Hero";
-export { MyAccount } from "./MyAccount";
 export { Navbar } from "./Navbar";
 export { OrderSummary } from "./OrderSummary";
 export { ProductCard } from "./ProductCard";

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Navbar, Footer, RequireAuth, MyAccount } from "./components";
+import { Navbar, Footer, RequireAuth } from "./components";
 import {
   Homepage,
   Login,
@@ -22,12 +22,10 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-
         <Route path="/" element={<RequireAuth />}>
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/account" element={<MyAccount />} />
         </Route>
       </Routes>
       <Footer />

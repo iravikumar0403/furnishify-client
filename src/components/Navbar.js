@@ -100,9 +100,6 @@ export const Navbar = () => {
                   className="dropdown-menu"
                   style={isOpen ? { display: "block", right: 0 } : {}}
                 >
-                  <li className="dropdown-item">
-                    <Link to="account">Account</Link>
-                  </li>
                   <li className="dropdown-item" onClick={handleLogoutClick}>
                     Logout
                   </li>
