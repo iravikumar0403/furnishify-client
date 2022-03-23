@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Navbar, Footer, RequireAuth, MyAccount, AddressForm } from "./components";
-import { useModal } from "./context/modal-context"
+import { Navbar, Footer, RequireAuth, MyAccount } from "./components";
 import {
   Homepage,
   Login,
@@ -14,11 +13,9 @@ import {
 } from "./pages";
 
 function App() {
-  const { isOpen } = useModal()
   return (
     <Fragment>
       <Navbar />
-      { isOpen && <AddressForm />}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/products" element={<ProductListing />} />

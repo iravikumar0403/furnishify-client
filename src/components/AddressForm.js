@@ -1,11 +1,11 @@
-import { useReducer } from "react";
+import { useReducer, useRef } from "react";
 import { useAddress } from "../context/address-context";
-import { useModal } from "../context/modal-context";
 import { addressFormReducer } from "../reducers/formReducer";
 import { updateAddress } from "../services";
 import { v4 as uuid } from "uuid";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
-export const AddressForm = () => {
+export const AddressForm = ({ closeModal }) => {
   const initialState = {
     name: "",
     phone: "",
@@ -14,10 +14,12 @@ export const AddressForm = () => {
     state: "",
     zip: "",
   };
+
+  const modalRef = useRef(null);
   const [formState, dispatch] = useReducer(addressFormReducer, initialState);
   const { name, phone, street, city, state, zip } = formState;
-  const { hideModal } = useModal();
   const { address, setAddress, setSelectedAddress } = useAddress();
+  useOutsideClick(modalRef, closeModal);
 
   const handleNameChange = (e) =>
     dispatch({
@@ -71,17 +73,18 @@ export const AddressForm = () => {
     setAddress((prev) => [...prev, newAddress]);
     setSelectedAddress(newAddress);
     updateAddress([...address, newAddress]);
-    hideModal();
+    closeModal();
   };
+  console.log(modalRef);
 
   return (
     <div className="modal open" style={{ zIndex: "100" }}>
-      <div className="modal-dialog centered">
+      <div ref={modalRef} className="modal-dialog centered">
         <div className="modal-header">
           <h3> Add Address </h3>
           <button
             className="btn primary icon-only modal-close"
-            onClick={hideModal}
+            onClick={closeModal}
           >
             <i className="fa fa-times"></i>
           </button>
@@ -141,7 +144,7 @@ export const AddressForm = () => {
                 <button type="submit" className="btn primary">
                   Save
                 </button>
-                <button className="btn primary outlined" onClick={hideModal}>
+                <button className="btn primary outlined" onClick={closeModal}>
                   Cancel
                 </button>
               </div>

@@ -1,14 +1,23 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useAddress } from "../context/address-context";
-import { useModal } from "../context/modal-context";
 import { AddressCard } from "./AddressCard";
+import { AddressForm } from "./AddressForm";
 
 export const SelectAddress = ({ setCurrentStep }) => {
   const { address, selectedAddress } = useAddress();
-  const { showModal } = useModal();
+  const [isOpen, setIsOpen] = useState();
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   return (
     <Fragment>
+      {isOpen && <AddressForm closeModal={closeModal} />}
       <h3 className="text-center">Select Delivery Address</h3>
       {address.map((addr) => (
         <AddressCard key={addr._id} address={addr} />
