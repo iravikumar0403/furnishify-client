@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { useProducts } from "../context/product-context";
 import { updateWishlist } from "../services";
@@ -12,6 +12,7 @@ export const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { pathname } = useLocation();
   const product = findItemById(id, products);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export const ProductDetails = () => {
       });
       updateCart([...cart, { ...product, quantity: 1 }]);
     } else {
-      navigate("/login");
+      navigate("/login", { state: { from: pathname } });
     }
   };
 
@@ -60,7 +61,7 @@ export const ProductDetails = () => {
       });
       updateWishlist([...wishlist, product]);
     } else {
-      navigate("/login");
+      navigate("/login", { state: { from: pathname } });
     }
   };
 
