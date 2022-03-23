@@ -10,11 +10,10 @@ export const fetchAddress = async (setAddress) => {
 
 export const updateAddress = async (address) => {
   try {
-    const { data } = await axios.post(`${REACT_APP_API_URL}/address`, {
-      address
+    await axios.post(`${REACT_APP_API_URL}/address`, {
+      address,
     });
-    console.log(data)
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

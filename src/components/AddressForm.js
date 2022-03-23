@@ -29,7 +29,6 @@ export const AddressForm = ({ closeModal }) => {
 
   const handlePhoneChange = (e) => {
     const input = e.target.value;
-    console.log(isNaN(input));
     if (isNaN(input) || input.length > 10) return;
     dispatch({
       type: "PHONE",
@@ -75,7 +74,6 @@ export const AddressForm = ({ closeModal }) => {
     updateAddress([...address, newAddress]);
     closeModal();
   };
-  console.log(modalRef);
 
   return (
     <div className="modal open" style={{ zIndex: "100" }}>
