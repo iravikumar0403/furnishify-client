@@ -1,10 +1,11 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
 import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
 import { logout } from "../services";
 import { useProducts } from "../context/product-context";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,8 @@ export const Navbar = () => {
   const { cart, wishlist } = useProducts();
   const { pathname } = useLocation();
   const { user, dispatch: authDispatch } = useAuth();
+  const dropdownRef = useRef();
+  useOutsideClick(dropdownRef, () => setIsOpen(false));
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -84,7 +87,7 @@ export const Navbar = () => {
                   </Link>
                 </span>
               </li>
-              <div className="dropdown">
+              <div className="dropdown" ref={dropdownRef}>
                 <button
                   className="btn text-light icon-only"
                   onClick={() => {
