@@ -9,6 +9,7 @@ import {
   Signup,
   Cart,
   WishList,
+  Checkout,
 } from "./pages";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<RequireAuth />}>
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<WishList />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
       </Routes>
       <Footer />

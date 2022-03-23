@@ -6,6 +6,52 @@
   --background-secondary: #38445c;
 }
 
+.container {
+  margin: auto;
+  max-width: 720px;
+}
+
+.stepper-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+.avatar.stepper {
+  background-color: var(--background-secondary);
+}
+
+.avatar.stepper.active {
+  background-color: var(--primary-color);
+}
+
+.address {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+table,
+tr,
+th,
+td {
+  border: 1px solid var(--divider-color);
+  width: 100%;
+  padding: 1rem;
+  border-collapse: collapse;
+}
+
+.payment-card {
+  max-width: 100%;
+}
+.btn-group {
+  display: flex;
+  align-items: center;
+}
 .p-0 {
   padding-left: 0;
   padding-right: 0;

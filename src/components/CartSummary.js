@@ -1,18 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useProducts } from "../context/product-context";
+import { calcCartPrice, calcDeliveryCharges, calcTotalPrice } from "../utils";
 
 export const CartSummary = () => {
   const { cart } = useProducts();
-
-  const calcCartPrice = (cartItems) => {
-    return cartItems.reduce(
-      (price, product) => (price = price + product.price * product.quantity),
-      0
-    );
-  };
-
-  const calcTotalPrice = (cartPrice, discount, deliveryCharges) =>
-    cartPrice - discount + deliveryCharges;
+  const cartTotal = calcCartPrice(cart);
+  const deliveryCharges = calcDeliveryCharges(cartTotal);
 
   return (
     <div className="cart-summary">
@@ -21,34 +15,30 @@ export const CartSummary = () => {
         <li>
           <div className="summary-price">
             <p>Cart Price</p>
-            <p>₹ {calcCartPrice(cart)}</p>
-          </div>
-        </li>
-        <li>
-          <div className="summary-price">
-            <p>Discount</p>
-            <p>₹ 499</p>
+            <p>₹ {cartTotal}</p>
           </div>
         </li>
         <li>
           <div className="summary-price">
             <p>Delivery Charges</p>
-            <p>₹ 499</p>
+            <p>₹ {deliveryCharges}</p>
           </div>
         </li>
         <li>
           <div className="summary-price">
             <p className="fs-2">Total</p>
             <p className="fs-2">
-              ₹ {calcTotalPrice(calcCartPrice(cart), 499, 499)}
+              ₹ {calcTotalPrice(cartTotal, deliveryCharges)}
             </p>
           </div>
         </li>
       </ul>
       <div>
-        <button className="btn primary checkout-btn">
-          Proceed to Checkout
-        </button>
+        <Link to="/checkout">
+          <button className="btn primary checkout-btn" disabled={!cart.length}>
+            Proceed to Checkout
+          </button>
+        </Link>
       </div>
     </div>
   );
