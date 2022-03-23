@@ -3,7 +3,7 @@ import { useAddress } from "../context/address-context";
 import { useModal } from "../context/modal-context";
 import { addressFormReducer } from "../reducers/formReducer";
 import { updateAddress } from "../services";
-import { v4 as uuid} from "uuid"
+import { v4 as uuid } from "uuid";
 
 export const AddressForm = () => {
   const initialState = {
@@ -17,7 +17,7 @@ export const AddressForm = () => {
   const [formState, dispatch] = useReducer(addressFormReducer, initialState);
   const { name, phone, street, city, state, zip } = formState;
   const { hideModal } = useModal();
-  const { address, setAddress, setSelectedAddress } = useAddress()
+  const { address, setAddress, setSelectedAddress } = useAddress();
 
   const handleNameChange = (e) =>
     dispatch({
@@ -66,12 +66,12 @@ export const AddressForm = () => {
     e.preventDefault();
     const newAddress = {
       ...formState,
-      _id : uuid()
-    }
-    setAddress(prev => [...prev, newAddress])
-    setSelectedAddress(newAddress)
-    updateAddress([...address, newAddress])
-    hideModal()
+      _id: uuid(),
+    };
+    setAddress((prev) => [...prev, newAddress]);
+    setSelectedAddress(newAddress);
+    updateAddress([...address, newAddress]);
+    hideModal();
   };
 
   return (
@@ -137,7 +137,7 @@ export const AddressForm = () => {
                 onChange={handleZipChange}
                 placeholder="zip"
               />
-              <div className="btn-group space-between my-2">
+              <div className="btn-group my-2">
                 <button type="submit" className="btn primary">
                   Save
                 </button>

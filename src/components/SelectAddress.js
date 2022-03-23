@@ -5,7 +5,7 @@ import { AddressCard } from "./AddressCard";
 
 export const SelectAddress = ({ setCurrentStep }) => {
   const { address, selectedAddress } = useAddress();
-  const { showModal } = useModal()
+  const { showModal } = useModal();
 
   return (
     <Fragment>
@@ -14,9 +14,12 @@ export const SelectAddress = ({ setCurrentStep }) => {
         <AddressCard key={addr._id} address={addr} />
       ))}
       <div className="btn-group">
-        <button className="btn primary mr-auto ml-2 my-3" onClick={showModal}>Add new</button>
+        <button className="btn primary mr-auto ml-2 my-3" onClick={showModal}>
+          Add new
+        </button>
         <button
           className="btn primary ml-auto mr-2 my-3"
+          title={!selectedAddress && "No address selected"}
           disabled={!selectedAddress}
           onClick={() => setCurrentStep("summary")}
         >

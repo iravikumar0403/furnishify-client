@@ -51,6 +51,7 @@ td {
 .btn-group {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .p-0 {
   padding-left: 0;
