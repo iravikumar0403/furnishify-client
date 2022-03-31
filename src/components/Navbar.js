@@ -11,7 +11,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const { dispatch: filterDispatch } = useFilter();
+  const { searchQuery, dispatch: filterDispatch } = useFilter();
   const { cart, wishlist } = useProducts();
   const { pathname } = useLocation();
   const { user, dispatch: authDispatch } = useAuth();
@@ -19,15 +19,26 @@ export const Navbar = () => {
   useOutsideClick(dropdownRef, () => setIsOpen(false));
 
   useEffect(() => {
+    if (pathname !== "/products") {
+      setQuery("");
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    setQuery(searchQuery);
+  }, [searchQuery]);
+
+  useEffect(() => {
     const id = setTimeout(() => {
       filterDispatch({
         type: "SEARCH",
         payload: query,
       });
+      if (pathname !== "/products" && query) navigate("/products");
     }, 500);
 
     return () => clearTimeout(id);
-  }, [filterDispatch, query]);
+  }, [filterDispatch, navigate, pathname, query]);
 
   const handleLogoutClick = () => {
     setIsOpen(false);
