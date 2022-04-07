@@ -19,6 +19,10 @@ export const Products = () => {
   const filteredProducts = filterByPrice(filteredByRating, filters.price);
   const sortedProducts = getSortedProducts(filteredProducts, filters.sortBy);
 
+  if (sortedProducts.length === 0) {
+    return <p className="fs-2 text-center my-5">No products found</p>;
+  }
+
   return (
     <section className="card-grid justify-center py-5">
       {loading && "Loading..."}
