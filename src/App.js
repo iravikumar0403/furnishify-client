@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Navbar, Footer, RequireAuth } from "./components";
+import { Navbar, Footer, RequireAuth, ScrollToTop } from "./components";
 import {
   Homepage,
   Login,
@@ -14,7 +13,7 @@ import {
 
 function App() {
   return (
-    <Fragment>
+    <ScrollToTop>
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -29,7 +28,7 @@ function App() {
         </Route>
       </Routes>
       <Footer />
-    </Fragment>
+    </ScrollToTop>
   );
 }
 

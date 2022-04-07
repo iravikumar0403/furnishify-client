@@ -86,7 +86,7 @@ nav {
     url(./assets/hero.jpg);
   background-size: cover;
   background-position: center;
-  min-height: 88vh;
+  min-height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,6 +202,6 @@ aside {
   box-shadow: 0 0 4px var(--divider-color);
 }
 
-.modal{
+.modal {
   overflow: hidden;
 }
