@@ -14,8 +14,9 @@ export const Payment = ({ setCurrentStep }) => {
   return (
     <div className="container">
       <div className="card m-auto p-5 payment-card">
-        <h3 className="text-center">Oops! No payment method found</h3>
-        <h3 className="text-center">So... Your order is free!! 🎉🎉</h3>
+        <h3 className="text-center">
+          This feature is under development. Coming Soon
+        </h3>
       </div>
       <div className="btn-group">
         <button
