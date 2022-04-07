@@ -1,9 +1,21 @@
-:root {
+body {
+  --primary-color: #ae66ea;
+  --primary-text: #292929;
+  --secondary-text: #383535;
+  --background-primary: #f6f6f6;
+  --background-secondary: #f5f5f5;
+}
+
+body.dark {
   --primary-color: #ae66ea;
   --primary-text: #ffffff;
   --secondary-text: #fefefe;
   --background-primary: #1f2633;
   --background-secondary: #38445c;
+}
+
+.main {
+  min-height: calc(100vh - 12.7rem);
 }
 
 .container {
@@ -25,6 +37,10 @@
 
 .avatar.stepper.active {
   background-color: var(--primary-color);
+}
+
+.nav-menu-item a.active {
+  color: var(--primary-color);
 }
 
 .address {
@@ -110,6 +126,12 @@ aside {
 }
 
 .overlay {
+  flex-direction: column;
+}
+
+.empty {
+  padding-top: 3rem;
+  display: flex;
   flex-direction: column;
 }
 

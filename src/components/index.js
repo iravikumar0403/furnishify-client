@@ -7,6 +7,7 @@ export { Filters } from "./Filters";
 export { Footer } from "./Footer";
 export { Hero } from "./Hero";
 export { Navbar } from "./Navbar";
+export { NotFound } from "./NotFound";
 export { OrderSummary } from "./OrderSummary";
 export { ProductCard } from "./ProductCard";
 export { Products } from "./Products";

@@ -52,22 +52,12 @@ export const Filters = () => {
       </div>
       <div className="my-1">
         <p className="fs-2">Sort by</p>
-        <select className="input" onChange={handleSortChange}>
-          <option value="" defaultValue selected={sortBy === ""}>
-            sort by
-          </option>
-          <option value="price_asc" selected={sortBy === "price_asc"}>
-            Price: low to high
-          </option>
-          <option value="price_desc" selected={sortBy === "price_desc"}>
-            Price: high to low
-          </option>
-          <option value="rating_asc" selected={sortBy === "rating_asc"}>
-            Rating: low to high
-          </option>
-          <option value="rating_desc" selected={sortBy === "rating_desc"}>
-            Rating: high to low
-          </option>
+        <select value={sortBy} className="input" onChange={handleSortChange}>
+          <option value="">sort by</option>
+          <option value="price_asc">Price: low to high</option>
+          <option value="price_desc">Price: high to low</option>
+          <option value="rating_asc">Rating: low to high</option>
+          <option value="rating_desc">Rating: high to low</option>
         </select>
       </div>
       <hr />

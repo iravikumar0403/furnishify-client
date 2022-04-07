@@ -83,6 +83,12 @@ export const productReducer = (state, { type, payload }) => {
         wishlist: state.wishlist.filter((item) => item._id !== payload._id),
       };
 
+    case "ORDER_SUCCESSFUL":
+      return {
+        ...state,
+        cart: [],
+      };
+
     case "RESET":
       return {
         ...state,

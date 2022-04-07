@@ -1,11 +1,13 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
 import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
 import { logout } from "../services";
 import { useProducts } from "../context/product-context";
+import { useTheme } from "../context/theme-context";
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +18,7 @@ export const Navbar = () => {
   const { pathname } = useLocation();
   const { user, dispatch: authDispatch } = useAuth();
   const dropdownRef = useRef();
+  const { theme, toggleTheme } = useTheme();
   useOutsideClick(dropdownRef, () => setIsOpen(false));
 
   useEffect(() => {
@@ -55,10 +58,10 @@ export const Navbar = () => {
         </div>
         <ul className="nav-menu">
           <li className="nav-menu-item mx-1">
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li className="nav-menu-item mx-1">
-            <Link to="products">Shop Now</Link>
+            <NavLink to="products">Shop Now</NavLink>
           </li>
         </ul>
       </div>
@@ -72,7 +75,11 @@ export const Navbar = () => {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button className="btn icon-only text-light">
+            <button
+              className={`btn icon-only ${
+                theme === "dark" ? "text-light" : ""
+              }`}
+            >
               <i className="fa fa-search"></i>
             </button>
           </div>
@@ -100,7 +107,9 @@ export const Navbar = () => {
               </li>
               <div className="dropdown" ref={dropdownRef}>
                 <button
-                  className="btn text-light icon-only"
+                  className={`btn icon-only ${
+                    theme === "dark" ? "text-light" : ""
+                  }`}
                   onClick={() => {
                     setIsOpen((isOpen) => !isOpen);
                   }}
@@ -129,6 +138,25 @@ export const Navbar = () => {
               </button>
             </li>
           )}
+          <li className="nav-menu-item mr-1" onClick={toggleTheme}>
+            {theme === "dark" ? (
+              <button
+                className={`btn icon-only ${
+                  theme === "dark" ? "text-light" : ""
+                }`}
+              >
+                <BsFillSunFill className="fs-1" />
+              </button>
+            ) : (
+              <button
+                className={`btn icon-only ${
+                  theme === "dark" ? "text-light" : ""
+                }`}
+              >
+                <BsFillMoonFill className="fs-1" />
+              </button>
+            )}
+          </li>
         </ul>
         <div className="nav-menu-resp">
           <i className="fas fa-bars"></i>
