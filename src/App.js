@@ -1,5 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import { Navbar, Footer, RequireAuth, ScrollToTop } from "./components";
+import {
+  Navbar,
+  Footer,
+  RequireAuth,
+  ScrollToTop,
+  NotFound,
+} from "./components";
 import {
   Homepage,
   Login,
@@ -27,6 +33,7 @@ function App() {
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/checkout" element={<Checkout />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

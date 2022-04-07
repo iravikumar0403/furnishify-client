@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useFilter } from "../context/filter-context";
 import { useAuth } from "../context/auth-context";
 import logo from "../assets/furnishify.png";
@@ -58,10 +58,10 @@ export const Navbar = () => {
         </div>
         <ul className="nav-menu">
           <li className="nav-menu-item mx-1">
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li className="nav-menu-item mx-1">
-            <Link to="products">Shop Now</Link>
+            <NavLink to="products">Shop Now</NavLink>
           </li>
         </ul>
       </div>

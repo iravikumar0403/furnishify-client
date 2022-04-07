@@ -39,6 +39,10 @@ body.dark {
   background-color: var(--primary-color);
 }
 
+.nav-menu-item a.active {
+  color: var(--primary-color);
+}
+
 .address {
   display: flex;
 }
