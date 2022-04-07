@@ -1,4 +1,4 @@
-## Sparrow Store AKA Phoenix
+## Furnishify
 
 ### Introduction -
 
