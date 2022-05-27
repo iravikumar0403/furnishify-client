@@ -19,7 +19,7 @@ export const ProductCard = ({ product }) => {
       });
       updateWishlist([...wishlist, product]);
     } else {
-      navigate("/login", { state: { from: pathname } });
+      navigate("/login", { state: { from: pathname }, replace: true });
     }
   };
 

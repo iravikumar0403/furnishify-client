@@ -36,7 +36,7 @@ export const Login = () => {
   };
 
   if (user) {
-    return <Navigate to={from || "/"} />;
+    return <Navigate to={from || "/"} replace />;
   }
 
   return (

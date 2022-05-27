@@ -33,7 +33,7 @@ export const ProductDetails = () => {
       });
       updateCart([...cart, { ...product, quantity: 1 }]);
     } else {
-      navigate("/login", { state: { from: pathname } });
+      navigate("/login", { state: { from: pathname }, replace: true });
     }
   };
 
@@ -61,7 +61,7 @@ export const ProductDetails = () => {
       });
       updateWishlist([...wishlist, product]);
     } else {
-      navigate("/login", { state: { from: pathname } });
+      navigate("/login", { state: { from: pathname }, replace: true });
     }
   };
 
