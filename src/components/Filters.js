@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFilter } from "../context/filter-context";
 
 export const Filters = () => {
@@ -40,6 +40,14 @@ export const Filters = () => {
   const toggleFilter = () => {
     setShowFilter((prev) => !prev);
   };
+
+  useEffect(
+    () => () =>
+      dispatch({
+        type: "CLEAR_FILTER",
+      }),
+    [dispatch]
+  );
 
   return (
     <>
@@ -156,7 +164,9 @@ export const Filters = () => {
                 checked={rating === "4"}
                 onChange={handleRatingChange}
               />
-              <label htmlFor="four">Four stars and above</label>
+              <label htmlFor="four">
+                4+ <i className="text-warn fa-solid fa-star"></i>
+              </label>
             </li>
             <li>
               <input
@@ -168,7 +178,9 @@ export const Filters = () => {
                 checked={rating === "3"}
                 onChange={handleRatingChange}
               />
-              <label htmlFor="three">Three stars and above</label>
+              <label htmlFor="three">
+                3+ <i className="text-warn fa-solid fa-star"></i>
+              </label>
             </li>
             <li>
               <input
@@ -180,7 +192,9 @@ export const Filters = () => {
                 checked={rating === "2"}
                 onChange={handleRatingChange}
               />
-              <label htmlFor="two">Two stars and above</label>
+              <label htmlFor="two">
+                2+ <i className="text-warn fa-solid fa-star"></i>
+              </label>
             </li>
             <li>
               <input
@@ -192,7 +206,9 @@ export const Filters = () => {
                 checked={rating === "1"}
                 onChange={handleRatingChange}
               />
-              <label htmlFor="one">One stars and above</label>
+              <label htmlFor="one">
+                1+ <i className="text-warn fa-solid fa-star"></i>
+              </label>
             </li>
           </ul>
         </div>
