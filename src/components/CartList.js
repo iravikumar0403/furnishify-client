@@ -62,7 +62,7 @@ export const CartList = () => {
               alt={product.title}
             />
           </div>
-          <div>
+          <div className="card-details">
             <div className="card-body">
               <h3 className="card-title">{product.title}</h3>
               <p className="card-text">₹ {product.price}</p>
@@ -85,13 +85,13 @@ export const CartList = () => {
             </div>
             <div className="card-footer">
               <button
-                className="btn danger outlined"
+                className="btn danger outlined mx-1 mb-1"
                 onClick={() => removeFromCart(product)}
               >
                 Remove from cart
               </button>
               <button
-                className="btn primary ml-1"
+                className="btn primary mx-1 mb-1"
                 onClick={() => moveToWishlist(product)}
               >
                 Move to wishlist

@@ -74,7 +74,7 @@ export const ProductDetails = () => {
   };
 
   return (
-    <div className="grid grid-50-50 m-5 px-5">
+    <div className="grid grid-50-50 p-5 product-details">
       <div>
         <img className="img-responsive" src={activeImage} alt={product.title} />
       </div>
@@ -83,7 +83,7 @@ export const ProductDetails = () => {
         <p className="text-secondary">By {product.seller}</p>
         <h2>₹ {product.price}</h2>
         <p>{product.description}</p>
-        <div>
+        <div className="product-images">
           {product.images.map((img, index) => (
             <img
               key={index}
