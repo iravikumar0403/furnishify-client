@@ -89,9 +89,11 @@ export const Navbar = () => {
                 <span className="badge-container">
                   <Link to="wishlist">
                     <i className="fs-2 fa-solid fa-heart"></i>
-                    <span className="badge top right bg-primary text-light">
-                      {wishlist.length}
-                    </span>
+                    {wishlist.length > 0 && (
+                      <span className="badge top right bg-primary text-light">
+                        {wishlist.length}
+                      </span>
+                    )}
                   </Link>
                 </span>
               </li>
@@ -99,9 +101,11 @@ export const Navbar = () => {
                 <span className="badge-container">
                   <Link to="cart">
                     <i className="fs-2 fa fa-cart-shopping"></i>
-                    <span className="badge top right bg-primary text-light">
-                      {cart.length}
-                    </span>
+                    {cart.length > 0 && (
+                      <span className="badge top right bg-primary text-light">
+                        {cart.length}
+                      </span>
+                    )}
                   </Link>
                 </span>
               </li>
